@@ -1,5 +1,6 @@
 import discord
 import os
+from cogs import *
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -10,6 +11,7 @@ bot = commands.Bot(command_prefix='?', intents=intents)
 
 @bot.event
 async def on_ready():
+    await bot.add_cog(Urban(bot))
     print(f'Logged on as {bot.user}')
 
 def main():
