@@ -4,6 +4,7 @@ from discord.ext import commands
 class UrbanDict(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.randList = []
 
     def generateResponse(self, wordEntry, word=None):
         response = ''
@@ -21,7 +22,9 @@ class UrbanDict(commands.Cog):
 
     @commands.command(name='urbanrandom')
     async def randomWord(self, ctx):
-        api = requests.get('https://api.urbandictionary.com/v0/random').json()
-        message = self.generateResponse(api['list'][0])
+        if len(self.randList) == 0:
+            self.randList = requests.get('https://api.urbandictionary.com/v0/random').json()['list']
+        message = self.generateResponse(self.randList[0])
         await ctx.send(message)
+        self.randList.pop(0)
 
