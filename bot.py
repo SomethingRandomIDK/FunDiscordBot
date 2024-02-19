@@ -12,6 +12,7 @@ bot = commands.Bot(command_prefix='?', intents=intents)
 @bot.event
 async def on_ready():
     await bot.add_cog(Urban(bot))
+    await bot.add_cog(Text(bot))
     print(f'Logged on as {bot.user}')
 
 def main():
