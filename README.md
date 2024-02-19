@@ -13,7 +13,7 @@ Has a set of 3 commands to lookup words from [Urban Dictionary](https://www.urba
 
 This command gets a random word and shows the word, defintion, and example
 
-**urban** [word]
+**urban** [word/phrase]
 
 This command gets the definition of the specified word
 
