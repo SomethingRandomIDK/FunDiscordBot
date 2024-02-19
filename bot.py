@@ -13,6 +13,7 @@ bot = commands.Bot(command_prefix='?', intents=intents)
 async def on_ready():
     await bot.add_cog(Urban(bot))
     await bot.add_cog(Text(bot))
+    await bot.add_cog(Eight(bot))
     print(f'Logged on as {bot.user}')
 
 def main():
