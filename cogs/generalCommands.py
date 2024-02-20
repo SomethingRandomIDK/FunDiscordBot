@@ -5,6 +5,7 @@ helpResponses = {'default': 'Default Help Message',
                  'urban': 'Urban Help Message',
                  'urbanrandom': 'Urban Random Help Message',
                  'nextdef': 'NextDef Help Message',
+                 'help': 'Help Help Message',
                  '8ball': '8Ball Help Message'}
 
 class General(commands.Cog):
