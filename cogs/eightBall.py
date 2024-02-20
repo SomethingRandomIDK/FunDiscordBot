@@ -1,3 +1,4 @@
+import discord
 import random
 from discord.ext import commands
 
@@ -25,8 +26,11 @@ responses = ['It is certain',
 class EightBall(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.color = 0x4b0082
 
     @commands.command(name='8ball')
     async def getResponse(self, ctx):
-        await ctx.send(random.choice(responses))
+        embed = discord.Embed(color = self.color)
+        embed.add_field(name='8ball Response', value=random.choice(responses))
+        await ctx.send(embed=embed)
 

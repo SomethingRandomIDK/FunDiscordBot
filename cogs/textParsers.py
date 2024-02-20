@@ -1,9 +1,11 @@
+import discord
 import re
 from discord.ext import commands
 
 class TextParsers(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.pTableColor = 0x078c50
 
     def searchPeriodicTable(self, content):
         pTableRegex = 'h[efgos]?|l[airuv]|b[aehikr]?|c[adeflmnorsu]?|n[abdehiop]?|o[gs]?|f[elmr]?|m[cdgnot]|a[cglmrstu]|s[bcegimnr]?|p[abdmortu]?|kr?|t[abcehilms]|v|z[nr]|g[ade]|r[abefghnu]|yb?|i[nr]?|xe|w|d[bsy]|e[sru]|u*'
@@ -23,5 +25,8 @@ class TextParsers(commands.Cog):
         if pTableCheck:
             pTableResponse = 'Your message can be rewritten using Elements from the Periodic Table as:\n'
             pTableResponse += pTableCheck
-            await message.channel.send(pTableResponse)
+
+            embed = discord.Embed(color=self.pTableColor)
+            embed.add_field(name='Periodic Table', value=pTableResponse)
+            await message.channel.send(embed=embed)
 

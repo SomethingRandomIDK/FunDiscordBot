@@ -1,3 +1,4 @@
+import discord
 import requests
 from discord.ext import commands
 
@@ -8,27 +9,26 @@ class UrbanDict(commands.Cog):
         self.selDefList = []
         self.defListLen = 0
         self.selWord = None
+        self.color = 0xad2424
 
-    def generateResponse(self, wordEntry, word=None):
-        response = ''
-
-        if not word:
-            word = wordEntry['word']
-        response += f'**Word:** {word}\n'
+    def generateResponse(self, wordEntry, embed=None):
+        if not embed:
+            embed = discord.Embed(color=self.color)
+            embed.add_field(name='Word:', value=wordEntry['word'])
 
         definition = wordEntry['definition'].replace('[', '').replace(']', '')
         example = wordEntry['example'].replace('[', '').replace(']', '')
-        response += f'**Definition:**\n{definition}\n'
-        response += f'**Example:**\n{example}\n'
+        embed.add_field(name='Definition:', value=definition)
+        embed.add_field(name='Example:', value=example)
         
-        return response
+        return embed
 
     @commands.command(name='urbanrandom')
     async def randomWord(self, ctx):
         if len(self.randList) == 0:
             self.randList = requests.get('https://api.urbandictionary.com/v0/random').json()['list']
-        message = self.generateResponse(self.randList[0])
-        await ctx.send(message)
+        embed = self.generateResponse(self.randList[0])
+        await ctx.send(embed=embed)
         self.randList.pop(0)
 
     @commands.command(name='urban')
@@ -40,23 +40,35 @@ class UrbanDict(commands.Cog):
         self.defListLen = len(self.selDefList)
         self.selWord = arg
         if self.defListLen == 0:
-            await ctx.send(f'{arg} was not found in the Urban Dictionary')
+            message = f'{arg} was not found in the Urban Dictionary'
+            embed = discord.Embed(color=self.color)
+            embed.add_field(name='Urban Dictionary', value=message)
+            await ctx.send(embed=embed)
             return
 
-        message = f'*Defintion 1 of {self.defListLen}*\n'
-        message += self.generateResponse(self.selDefList[0], arg)
-        await ctx.send(message)
+        embed = discord.Embed(color=self.color)
+        message = f'*Defintion 1 of {self.defListLen}*'
+        embed.add_field(name='Number of Definitions:', value=message)
+        embed.add_field(name='Word:', value=arg.capitalize())
+        embed = self.generateResponse(self.selDefList[0], embed=embed)
+        await ctx.send(embed=embed)
         self.selDefList.pop(0)
 
     @commands.command(name='nextdef')
     async def getNextDefintion(self, ctx):
         if len(self.selDefList) == 0:
-            await ctx.send(f'There are no additional definitions available please check [the official Urban Dictionary website](https://www.urbandictionary.com) for more defintions')
+            message = f'There are no additional definitions available please check [the official Urban Dictionary website](https://www.urbandictionary.com) for more defintions'
+            embed = discord.Embed(color=self.color)
+            embed.add_field(name='Urban Dictionary', value=message)
+            await ctx.send(embed=embed)
             return
 
+        embed = discord.Embed(color=self.color)
         curDef = self.defListLen - len(self.selDefList) + 1
-        message = f'*Definition {curDef} of {self.defListLen}*\n'
-        message += self.generateResponse(self.selDefList[0], self.selWord)
-        await ctx.send(message)
+        message = f'*Definition {curDef} of {self.defListLen}*'
+        embed.add_field(name='Number of Definitions:', value=message)
+        embed.add_field(name='Word:', value=self.selWord.capitalize())
+        embed = self.generateResponse(self.selDefList[0], embed=embed)
+        await ctx.send(embed=embed)
         self.selDefList.pop(0)
 
