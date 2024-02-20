@@ -24,6 +24,17 @@ The setup for the bot is fairly simple by following these steps.
 
 ---
 # Features
+## Help
+This bot has a basic help function with the default output being a short introduction to the bot followed by the list of commands available and their basic description. As well as indepth help available for each of the commands with another help command.
+
+**help**
+
+This command give a general description of the bot and a list of the commands available
+
+**help** [command]
+
+This command gives more detailed instructions about how to use the command
+
 ## Urban Dictionary
 Has a set of 3 commands to lookup words from [Urban Dictionary](https://www.urbandictionary.com)
 
