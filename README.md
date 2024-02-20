@@ -10,10 +10,16 @@ The setup for the bot is fairly simple by following these steps.
 3. Open a terminal and run the following commands:
 
     ```
-    $ git clone https://github.com/SomethingRandomIDK/FunDiscordBot.git
-    $ cd FunDiscordBot
-    $ pip install -r requirements.txt
-    $ python3 bot.py
+    git clone https://github.com/SomethingRandomIDK/FunDiscordBot.git
+    ```
+    ```
+    cd FunDiscordBot
+    ```
+    ```
+    pip install -r requirements.txt
+    ```
+    ```
+    python3 bot.py
     ```
 
 ---
