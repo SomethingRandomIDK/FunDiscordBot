@@ -9,10 +9,10 @@ The setup for the bot is fairly simple by following these steps.
 2. Create a .env file based on the .env.example file, copying your discord bot Token from the previous step into the file.
 3. Open a terminal and run the following commands:
 
-    git clone https://github.com/SomethingRandomIDK/FunDiscordBot.git
-    cd FunDiscordBot
-    pip install -r requirements.txt
-    python3 bot.py
+    $ git clone https://github.com/SomethingRandomIDK/FunDiscordBot.git
+    $ cd FunDiscordBot
+    $ pip install -r requirements.txt
+    $ python3 bot.py
 
 ---
 # Features
