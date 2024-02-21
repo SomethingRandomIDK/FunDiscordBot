@@ -14,12 +14,12 @@ class UrbanDict(commands.Cog):
     def generateResponse(self, wordEntry, embed=None):
         if not embed:
             embed = discord.Embed(color=self.color)
-            embed.add_field(name='Word:', value=wordEntry['word'])
+            embed.add_field(name='Word:', value=wordEntry['word'], inline=False)
 
         definition = wordEntry['definition'].replace('[', '').replace(']', '')
         example = wordEntry['example'].replace('[', '').replace(']', '')
-        embed.add_field(name='Definition:', value=definition)
-        embed.add_field(name='Example:', value=example)
+        embed.add_field(name='Definition:', value=definition, inline=False)
+        embed.add_field(name='Example:', value=example, inline=False)
         
         return embed
 
@@ -42,14 +42,14 @@ class UrbanDict(commands.Cog):
         if self.defListLen == 0:
             message = f'{arg} was not found in the Urban Dictionary'
             embed = discord.Embed(color=self.color)
-            embed.add_field(name='Urban Dictionary', value=message)
+            embed.add_field(name='Urban Dictionary', value=message, inline=False)
             await ctx.send(embed=embed)
             return
 
         embed = discord.Embed(color=self.color)
         message = f'*Defintion 1 of {self.defListLen}*'
-        embed.add_field(name='Number of Definitions:', value=message)
-        embed.add_field(name='Word:', value=arg.capitalize())
+        embed.add_field(name='Number of Definitions:', value=message, inline=False)
+        embed.add_field(name='Word:', value=arg.capitalize(), inline=False)
         embed = self.generateResponse(self.selDefList[0], embed=embed)
         await ctx.send(embed=embed)
         self.selDefList.pop(0)
@@ -59,15 +59,15 @@ class UrbanDict(commands.Cog):
         if len(self.selDefList) == 0:
             message = f'There are no additional definitions available please check [the official Urban Dictionary website](https://www.urbandictionary.com) for more defintions'
             embed = discord.Embed(color=self.color)
-            embed.add_field(name='Urban Dictionary', value=message)
+            embed.add_field(name='Urban Dictionary', value=message, inline=False)
             await ctx.send(embed=embed)
             return
 
         embed = discord.Embed(color=self.color)
         curDef = self.defListLen - len(self.selDefList) + 1
         message = f'*Definition {curDef} of {self.defListLen}*'
-        embed.add_field(name='Number of Definitions:', value=message)
-        embed.add_field(name='Word:', value=self.selWord.capitalize())
+        embed.add_field(name='Number of Definitions:', value=message, inline=False)
+        embed.add_field(name='Word:', value=self.selWord.capitalize(), inline=False)
         embed = self.generateResponse(self.selDefList[0], embed=embed)
         await ctx.send(embed=embed)
         self.selDefList.pop(0)
