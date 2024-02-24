@@ -25,11 +25,11 @@ The setup for the bot is fairly simple by following these steps.
 ---
 # Features
 ## Help
-This bot has a basic help function with the default output being a short introduction to the bot followed by the list of commands available and their basic description. As well as indepth help available for each of the commands with another help command.
+This bot has a basic help function with the default output being a list of commands available. As well as indepth help available for each of the commands with another help command.
 
 **help**
 
-This command give a general description of the bot and a list of the commands available
+This command gives the list of available commands
 
 **help** [command]
 
