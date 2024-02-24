@@ -29,7 +29,13 @@ class EightBall(commands.Cog):
         self.color = 0x4b0082
 
     @commands.command(name='8ball')
-    async def getResponse(self, ctx):
+    async def getResponse(self, ctx, *args):
+        if len(args) == 0:
+            embed = discord.Embed(color = self.color)
+            embed.add_field(name='8ball Response', value='Please ask a question')
+            await ctx.send(embed=embed)
+            return
+
         embed = discord.Embed(color = self.color)
         embed.add_field(name='8ball Response', value=random.choice(responses))
         await ctx.send(embed=embed)
