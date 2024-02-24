@@ -32,7 +32,13 @@ class UrbanDict(commands.Cog):
         self.randList.pop(0)
 
     @commands.command(name='urban')
-    async def selectedWord(self, ctx, *, arg):
+    async def selectedWord(self, ctx, *, arg=None):
+        if not arg:
+            embed = discord.Embed(color=self.color)
+            embed.add_field(name='Urban Dictionary', value='Please enter a word/phrase to search')
+            await ctx.send(embed=embed)
+            return
+
         url = 'https://api.urbandictionary.com/v0/define?term='
         url += arg.lower().strip().replace(' ', '&')
 
