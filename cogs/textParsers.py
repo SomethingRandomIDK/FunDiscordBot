@@ -46,17 +46,14 @@ class TextParsers(commands.Cog):
                     if idx == 0:
                         return
                     back = True
-                    continue
-                if idx + 1 != len(formattedContent) and formattedContent[idx+1] in pTable[curLetter]:
+                elif idx + 1 != len(formattedContent) and formattedContent[idx+1] in pTable[curLetter]:
                     msgRewrite.append(formattedContent[idx:idx + 2])
                     idx += 2
-                    continue
-                if '' in pTable[curLetter]:
+                elif '' in pTable[curLetter]:
                     msgRewrite.append(curLetter)
                     idx += 1
-                    continue
-                back = True
-                continue
+                else:
+                    back = True
             else:
                 if idx == 0:
                     return
@@ -67,7 +64,6 @@ class TextParsers(commands.Cog):
                         msgRewrite.append(prevVal[0])
                         idx += 1
                         back = False
-                        continue
                     elif idx == 0:
                         return
                 elif idx == 0:
