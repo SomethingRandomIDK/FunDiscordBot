@@ -31,6 +31,8 @@ This bot has a basic help function with the default output being a list of comma
 
 This command gives the list of available commands
 
+<img src="./images/help.png" alt="help">
+
 **help** [command]
 
 This command gives more detailed instructions about how to use the command
