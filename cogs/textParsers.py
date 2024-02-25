@@ -84,7 +84,7 @@ class TextParsers(commands.Cog):
 
         pTableString = ''.join([x.capitalize() for x in msgRewrite])
 
-        return msgRewrite
+        return pTableString
 
     @commands.Cog.listener()
     async def on_message(self, message):
