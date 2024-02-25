@@ -4,6 +4,10 @@ from discord.ext import commands
 
 class General(commands.Cog):
     def __init__(self, bot):
+        """Generates embeds for each command in the bot and loads all the
+        embeds into a dictionary
+        """
+
         self.bot = bot
         self.color = 0xe8e805
 
@@ -45,6 +49,11 @@ class General(commands.Cog):
 
     @commands.command(name='help')
     async def help(self, ctx, *arg):
+        """Displays a help message. If help is called with a valid command as
+        an argument, it displays the help for that specific command.
+        Otherwise the default help message is displayed.
+        """
+
         if len(arg) == 1 and self.helpResponses[arg[0].lower()]:
             await ctx.send(embed=self.helpResponses[arg[0].lower()])
         else:

@@ -12,6 +12,9 @@ class UrbanDict(commands.Cog):
         self.color = 0xad2424
 
     def generateResponse(self, wordEntry, embed=None):
+        """Generates embeds using the Urban Dictionary defintions
+        """
+
         if not embed:
             embed = discord.Embed(color=self.color)
             embed.add_field(name='Word:', value=wordEntry['word'], inline=False)
@@ -25,6 +28,10 @@ class UrbanDict(commands.Cog):
 
     @commands.command(name='urbanrandom')
     async def randomWord(self, ctx):
+        """Gets a random word from Urban Dictionary and sends a message with
+        the word, defintion and an example
+        """
+
         if len(self.randList) == 0:
             self.randList = requests.get('https://api.urbandictionary.com/v0/random').json()['list']
         embed = self.generateResponse(self.randList[0])
@@ -33,6 +40,10 @@ class UrbanDict(commands.Cog):
 
     @commands.command(name='urban')
     async def selectedWord(self, ctx, *, arg=None):
+        """Searches Urban Dictionary for the specified word/phrase and sends a
+        message with the word, its defintion, and an example
+        """
+
         if not arg:
             embed = discord.Embed(color=self.color)
             embed.add_field(name='Urban Dictionary', value='Please enter a word/phrase to search')
@@ -62,6 +73,10 @@ class UrbanDict(commands.Cog):
 
     @commands.command(name='nextdef')
     async def getNextDefintion(self, ctx):
+        """Gets an alternate defintion for the last searched word and sends
+        a message with alternate defintion.
+        """
+
         if len(self.selDefList) == 0:
             message = f'There are no additional definitions available please check [the official Urban Dictionary website](https://www.urbandictionary.com) for more defintions'
             embed = discord.Embed(color=self.color)

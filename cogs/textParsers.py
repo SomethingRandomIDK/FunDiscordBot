@@ -7,6 +7,10 @@ class TextParsers(commands.Cog):
         self.pTableColor = 0x078c50
 
     def searchPeriodicTable(self, content):
+        """Checks if content can be rewritten using Symbols from the
+        Periodic Table. If possible, outputs the rewritten content as a string
+        """
+
         pTable = {'h': ['', 'e', 'f', 'g', 'o', 's'],
                   'l': ['a', 'i', 'r', 'u', 'v'],
                   'b': ['', 'a', 'e', 'h', 'i', 'k', 'r'],
@@ -75,6 +79,10 @@ class TextParsers(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        """Tries to rewrite all messages using symbols from the periodic table.
+        If possible reponds with the rewritten message.
+        """
+
         if message.author.bot:
             return
         pTableCheck = self.searchPeriodicTable(message.content)

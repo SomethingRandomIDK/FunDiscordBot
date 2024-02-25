@@ -12,6 +12,10 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
+    """Loads all the cogs in and sends a message in the terminal with the name
+    of the bot
+    """
+
     await bot.add_cog(Urban(bot))
     await bot.add_cog(Text(bot))
     await bot.add_cog(Eight(bot))
