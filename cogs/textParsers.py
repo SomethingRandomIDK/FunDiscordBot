@@ -7,15 +7,6 @@ class TextParsers(commands.Cog):
         self.pTableColor = 0x078c50
 
     def searchPeriodicTable(self, content):
-        # This regex doesn't work for words like fire, probably because it check in order?
-        # pTableRegex = 'h[efgos]?|l[airuv]|b[aehikr]?|c[adeflmnorsu]?|n[abdehiop]?|o[gs]?|f[elmr]?|m[cdgnot]|a[cglmrstu]|s[bcegimnr]?|p[abdmortu]?|kr?|t[abcehilms]|v|z[nr]|g[ade]|r[abefghnu]|yb?|i[nr]?|xe|w|d[bsy]|e[sru]|u*'
-        #
-        # formattedContent = ''.join([x.lower() for x in content if x.lower() in 'abcdefghijklmnopqrstuvwxyz'])
-        #
-        # pTableString = ''.join([x.capitalize() for x in re.findall(pTableRegex, formattedContent)])
-        #
-        # if len(formattedContent) == len(pTableString):
-        #     return pTableString
         pTable = {'h': ['', 'e', 'f', 'g', 'o', 's'],
                   'l': ['a', 'i', 'r', 'u', 'v'],
                   'b': ['', 'a', 'e', 'h', 'i', 'k', 'r'],
@@ -40,7 +31,6 @@ class TextParsers(commands.Cog):
                   'd': ['b', 's', 'y'],
                   'e': ['s', 'r', 'y'],
                   'u': ['']}
-        # Need to try a back tracking algorithm I think
 
         formattedContent = ''.join([x.lower() for x in content if x.lower() in 'abcdefghijklmnopqrstuvwxyz'])
         if len(formattedContent) == 0:
@@ -50,7 +40,6 @@ class TextParsers(commands.Cog):
         idx = 0
         back = False
         while idx < len(formattedContent):
-            # check if two letter works, then check if one letter works if not go back
             if not back:
                 curLetter = formattedContent[idx]
                 if curLetter not in pTable:
@@ -69,6 +58,8 @@ class TextParsers(commands.Cog):
                 back = True
                 continue
             else:
+                if idx == 0:
+                    return
                 idx -= len(msgRewrite[-1])
                 prevVal = msgRewrite.pop(-1)
                 if len(prevVal) == 2:
