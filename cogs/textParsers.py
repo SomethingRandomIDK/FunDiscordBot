@@ -1,5 +1,4 @@
 import discord
-import re
 from discord.ext import commands
 
 class TextParsers(commands.Cog):
@@ -44,21 +43,55 @@ class TextParsers(commands.Cog):
         # Need to try a back tracking algorithm I think
 
         formattedContent = ''.join([x.lower() for x in content if x.lower() in 'abcdefghijklmnopqrstuvwxyz'])
-        if len(formattedContent) == 0 or not pTable[formattedContent[0]]:
+        if len(formattedContent) == 0:
             return
 
-        pTableRewrite = []
+        msgRewrite = []
         idx = 0
+        back = False
         while idx < len(formattedContent):
-            pass
-        return pTableRewrite
+            # check if two letter works, then check if one letter works if not go back
+            if not back:
+                curLetter = formattedContent[idx]
+                if curLetter not in pTable:
+                    if idx == 0:
+                        return
+                    back = True
+                    continue
+                if idx + 1 != len(formattedContent) and formattedContent[idx+1] in pTable[curLetter]:
+                    msgRewrite.append(formattedContent[idx:idx + 2])
+                    idx += 2
+                    continue
+                if '' in pTable[curLetter]:
+                    msgRewrite.append(curLetter)
+                    idx += 1
+                    continue
+                back = True
+                continue
+            else:
+                idx -= len(msgRewrite[-1])
+                prevVal = msgRewrite.pop(-1)
+                if len(prevVal) == 2:
+                    if '' in pTable[prevVal[0]]:
+                        msgRewrite.append(prevVal[0])
+                        idx += 1
+                        back = False
+                        continue
+                    elif idx == 0:
+                        return
+                elif idx == 0:
+                    return
+
+        pTableString = ''.join([x.capitalize() for x in msgRewrite])
+
+        return msgRewrite
 
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot:
             return
         pTableCheck = self.searchPeriodicTable(message.content)
-        if len(pTableCheck) != 0:
+        if pTableCheck:
             pTableResponse = 'Your message can be rewritten using Elements from the Periodic Table as:\n'
             pTableResponse += pTableCheck
 
