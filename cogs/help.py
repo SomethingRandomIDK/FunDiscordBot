@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 
-class General(commands.Cog):
+class Help(commands.Cog):
     def __init__(self, bot):
         """Generates embeds for each command in the bot and loads all the
         embeds into a dictionary
@@ -21,25 +21,41 @@ class General(commands.Cog):
 
         urbanEmbed = discord.Embed(color=self.color, title='Bot Help')
         urbanDescription = "This searches the [Urban Dictionary](https://www.urbandictionary.com) for a word or phrase"
-        urbanEmbed.add_field(name='Urban Description', value=urbanDescription, inline=False)
+        urbanEmbed.add_field(name='Urban Description',
+                             value=urbanDescription,
+                             inline=False)
         urbanUse = '`?urban [word/phrase]`\nThe `[word/phrase]` should be replaced by what you are searching for'
-        urbanEmbed.add_field(name='Urban Use', value=urbanUse, inline=False)
+        urbanEmbed.add_field(name='Urban Use',
+                             value=urbanUse,
+                             inline=False)
         
         urbanRandomEmbed = discord.Embed(color=self.color, title='Bot Help')
         urbanRandomDescription = "This gets a random word from [Urban Dictionary](https://www.urbandictionary.com)"
-        urbanRandomEmbed.add_field(name='Command Description', value=urbanRandomDescription, inline=False)
-        urbanRandomEmbed.add_field(name='Command Use', value='`?urbanrandom`', inline=False)
+        urbanRandomEmbed.add_field(name='Command Description',
+                                   value=urbanRandomDescription,
+                                   inline=False)
+        urbanRandomEmbed.add_field(name='Command Use',
+                                   value='`?urbanrandom`',
+                                   inline=False)
         
         nextDefEmbed = discord.Embed(color=self.color, title='Bot Help')
         nextDefDescription = 'This gets an alternate defintion for the last word searched using the urban command'
-        nextDefEmbed.add_field(name='NextDef Description', value=nextDefDescription, inline=False)
-        nextDefEmbed.add_field(name='NextDef Use', value='`?nextdef`', inline=False)
+        nextDefEmbed.add_field(name='NextDef Description',
+                               value=nextDefDescription,
+                               inline=False)
+        nextDefEmbed.add_field(name='NextDef Use',
+                               value='`?nextdef`',
+                               inline=False)
 
         eightBallEmbed = discord.Embed(color=self.color, title='Bot Help')
         eightDescription = 'This answers questions asked like an 8ball would'
-        eightBallEmbed.add_field(name='8ball Description', value=eightDescription, inline=False)
+        eightBallEmbed.add_field(name='8ball Description',
+                                 value=eightDescription,
+                                 inline=False)
         eightUse = '`?8ball [question]`\nThe `[question]` should be replaced by what you are asking'
-        eightBallEmbed.add_field(name='8ball Use', value=eightUse, inline=False)
+        eightBallEmbed.add_field(name='8ball Use',
+                                 value=eightUse,
+                                 inline=False)
         
         self.helpResponses = {'default': defaultEmbed,
                               'urban': urbanEmbed,

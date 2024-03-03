@@ -23,8 +23,8 @@ async def on_ready():
 
     await bot.add_cog(Urban(bot))
     await bot.add_cog(Text(bot))
-    await bot.add_cog(Eight(bot))
-    await bot.add_cog(General(bot))
+    await bot.add_cog(Eight(bot, config['cogs']['8ball']))
+    await bot.add_cog(Help(bot))
     print(f'Logged on as {bot.user}')
 
 def main():
