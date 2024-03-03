@@ -1,11 +1,13 @@
 {
-    "command_symbol": "?"
+    "command_symbol": "?",
     "cogs": {
         "urban": {
-            "active": 1
+            "active": 1,
+            "color": "ad2424"
         },
         "8ball": {
             "active": 1,
+            "color": "4b0082",
             "responses": [
                 "It is certain",
                 "It is decidedly so",
@@ -30,8 +32,12 @@
             ]
         },
         "periodic_table": {
-            "active": 1
+            "active": 1,
+            "color": "078c50"
         }
+    },
+    "help": {
+        "color": "somehex"
     }
 }
 
