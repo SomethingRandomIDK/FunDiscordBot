@@ -6,15 +6,18 @@ A Discord Bot with various features to make Discord servers more fun and interes
 The bot can be setup by follow these steps:
 
 1. Follow the steps on [this website](https://discordpy.readthedocs.io/en/stable/discord.html) to create your discord bot.
-2. Create a .env file based on the .env.example file, copying your discord bot Token from the previous step into the file.
-3. Open a terminal and run the following commands:
+2. Run this command to clone the repository:
 
     ```
     git clone https://github.com/SomethingRandomIDK/FunDiscordBot.git
     ```
-    ```
-    cd FunDiscordBot
-    ```
+
+3. Create a .env file based on the .env.example file, copying your discord bot token from step 1. in this file.
+
+**NOTE:** It is recommended that you setup a python virtual environment before running your bot to prevent unexpected behavior. Visit [this link](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/) for instructions on how to setup a virtual environment.
+
+4. Enter the folder for the discord bot and run the following commands to run the bot:
+
     ```
     pip install -r requirements.txt
     ```
