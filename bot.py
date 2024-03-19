@@ -1,3 +1,4 @@
+import asyncio
 import discord
 import json
 import os
@@ -17,15 +18,21 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    """Loads all the cogs in and sends a message in the terminal with the name
-    of the bot
+    """Sends a message in the terminal with the name
+    of the bot, after the bot has logged on
     """
 
+    print(f'Logged on as {bot.user}')
+    await load_cogs()
+
+async def load_cogs():
+    """Loads all the cogs for the discord bot
+    """
     await bot.add_cog(Urban(bot))
+    await bot.add_cog(Nasa(bot))
     await bot.add_cog(Text(bot))
     await bot.add_cog(Eight(bot, config['cogs']['8ball']))
     await bot.add_cog(Help(bot))
-    print(f'Logged on as {bot.user}')
 
 def main():
     bot.run(os.getenv('TOKEN'))
