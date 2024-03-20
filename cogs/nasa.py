@@ -1,14 +1,19 @@
+from datetime import time
 import discord
 import requests
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 urlSearch = 'https://images-api.nasa.gov/search'
+urlAPOD = 'https://api.nasa.gov/planetary/apod'
+APODtime = [time(hour=21, minute=49)]
 
 class Nasa(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.color = 0x7aa9f5
         self.searchResults = None
+
+        self.picOfDay.start()
 
     @commands.command(name='nasaSearch')
     async def nasaSearch(self, ctx, *args):
@@ -32,4 +37,27 @@ class Nasa(commands.Cog):
                         value=self.searchResults[0]['data'][0]['title'])
         await ctx.send(embed=embed)
         self.searchResults.pop(0)
+
+    @tasks.loop(time=APODtime)
+    async def picOfDay(self):
+        print('calling this')
+        params = {'api_key': 'DEMO_KEY',
+                  'thumbs': 1}
+        daily = requests.get(urlAPOD, params=params).json()
+        picUrl = None
+        if 'hdurl' in daily:
+            picUrl = daily['hdurl']
+        else:
+            picUrl = daily['url']
+        picTitle = daily['title']
+
+        embed = discord.Embed(color=self.color,
+                              title='Astronomy Picture of The Day')
+        embed.set_image(url=picUrl)
+        embed.add_field(name='Image Title:', value=picTitle)
+
+        for x in self.bot.guilds:
+            print('this works')
+            if x.system_channel is not None:
+                await x.system_channel.send(embed=embed)
 
