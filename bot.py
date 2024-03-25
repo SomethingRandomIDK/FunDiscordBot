@@ -17,8 +17,8 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    """Sends a message in the terminal with the name
-    of the bot, after the bot has logged on
+    """Sends a message in the terminal with the name of the bot, after the bot
+    has logged on it loads all the cogs
     """
 
     print(f'Logged on as {bot.user}')
@@ -31,6 +31,7 @@ async def load_cogs():
                'nasa': Nasa(bot, config['cogs']['nasa']),
                '8ball': Eight(bot, config['cogs']['8ball']),
                'message': Text(bot, config['cogs']['message'])}
+
     for x in config['cogs']:
         if config['cogs'][x]['active']:
             await bot.add_cog(allCogs[x])

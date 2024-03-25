@@ -42,6 +42,17 @@ This command gives more detailed instructions about how to use the command
 
 <img src="./images/helpcommand.png" alt="help [command]">
 
+## Nasa
+The bot can interact with the NASA database through their APIs
+
+**nasaSearch** [word/phrase]
+
+This command searches for the word/phrase in NASA's image and video database and gets the closest result
+
+**nextImg**
+
+This command returns an alternate image for the search
+
 ## Urban Dictionary
 Has a set of 3 commands to lookup words from [Urban Dictionary](https://www.urbandictionary.com)
 
