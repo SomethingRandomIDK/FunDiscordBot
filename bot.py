@@ -24,8 +24,6 @@ async def on_ready():
     print(f'Logged on as {bot.user}')
     await load_cogs()
 
-    print(bot.cogs)
-
 async def load_cogs():
     """Loads all the cogs for the discord bot
     """
