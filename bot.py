@@ -1,4 +1,3 @@
-import asyncio
 import discord
 import json
 import os
@@ -25,13 +24,18 @@ async def on_ready():
     print(f'Logged on as {bot.user}')
     await load_cogs()
 
+    print(bot.cogs)
+
 async def load_cogs():
     """Loads all the cogs for the discord bot
     """
-    await bot.add_cog(Urban(bot))
-    await bot.add_cog(Nasa(bot))
-    await bot.add_cog(Text(bot))
-    await bot.add_cog(Eight(bot, config['cogs']['8ball']))
+    allCogs = {'urban': Urban(bot),
+               'nasa': Nasa(bot),
+               '8ball': Eight(bot, config['cogs']['8ball']),
+               'message': Text(bot)}
+    for x in config['cogs']:
+        if config['cogs'][x]['active']:
+            await bot.add_cog(allCogs[x])
     await bot.add_cog(Help(bot))
 
 def main():

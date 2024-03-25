@@ -31,9 +31,14 @@
                 "Very doubtful"
             ]
         },
-        "periodic_table": {
+        "message": {
             "active": 1,
-            "color": "078c50"
+            "color": "078c50",
+            "periodic_table": 1
+        },
+        "nasa": {
+            "active": 1,
+            "color": "7aa9f5"
         }
     },
     "help": {
