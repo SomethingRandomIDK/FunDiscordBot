@@ -29,10 +29,10 @@ async def on_ready():
 async def load_cogs():
     """Loads all the cogs for the discord bot
     """
-    allCogs = {'urban': Urban(bot),
-               'nasa': Nasa(bot),
+    allCogs = {'urban': Urban(bot, config['cogs']['urban']),
+               'nasa': Nasa(bot, config['cogs']['nasa']),
                '8ball': Eight(bot, config['cogs']['8ball']),
-               'message': Text(bot)}
+               'message': Text(bot, config['cogs']['message'])}
     for x in config['cogs']:
         if config['cogs'][x]['active']:
             await bot.add_cog(allCogs[x])

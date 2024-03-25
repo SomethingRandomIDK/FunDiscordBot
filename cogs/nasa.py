@@ -8,9 +8,9 @@ urlAPOD = 'https://api.nasa.gov/planetary/apod'
 APODtime = [time(hour=21, minute=49)]
 
 class Nasa(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot, config):
         self.bot = bot
-        self.color = 0x7aa9f5
+        self.color = int(config['color'], 16)
         self.searchResults = None
 
         self.picOfDay.start()

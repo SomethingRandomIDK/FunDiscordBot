@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands
 
 class TextParsers(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot, config):
         self.bot = bot
-        self.pTableColor = 0x078c50
+        self.pTableColor = int(config['color'], 16)
 
     def searchPeriodicTable(self, content):
         """Checks if content can be rewritten using Symbols from the

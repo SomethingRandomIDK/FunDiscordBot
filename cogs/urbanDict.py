@@ -3,13 +3,13 @@ import requests
 from discord.ext import commands
 
 class UrbanDict(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot, config):
         self.bot = bot
         self.randList = []
         self.selDefList = []
         self.defListLen = 0
         self.selWord = None
-        self.color = 0xad2424
+        self.color = int(config['color'], 16)
 
     def generateResponse(self, wordEntry, embed=None):
         """Generates embeds using the Urban Dictionary defintions
