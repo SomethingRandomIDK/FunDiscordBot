@@ -8,10 +8,11 @@ urlAPOD = 'https://api.nasa.gov/planetary/apod'
 APODtime = [time(hour=21, minute=49)]
 
 class Nasa(commands.Cog):
-    def __init__(self, bot, config):
+    def __init__(self, bot, config, apiKey):
         self.bot = bot
         self.color = int(config['color'], 16)
         self.searchResults = None
+        self.key = apiKey
 
         self.picOfDay.start()
 
@@ -41,7 +42,7 @@ class Nasa(commands.Cog):
     @tasks.loop(time=APODtime)
     async def picOfDay(self):
         print('calling this')
-        params = {'api_key': 'DEMO_KEY',
+        params = {'api_key': self.key,
                   'thumbs': 1}
         daily = requests.get(urlAPOD, params=params).json()
         picUrl = None
