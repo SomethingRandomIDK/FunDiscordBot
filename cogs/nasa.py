@@ -5,7 +5,7 @@ from discord.ext import commands, tasks
 
 urlSearch = 'https://images-api.nasa.gov/search'
 urlAPOD = 'https://api.nasa.gov/planetary/apod'
-APODtime = [time(hour=21, minute=49)]
+APODtime = [time(hour=17, minute=56)]
 
 class Nasa(commands.Cog):
     def __init__(self, bot, config, apiKey):
@@ -41,24 +41,36 @@ class Nasa(commands.Cog):
 
     @tasks.loop(time=APODtime)
     async def picOfDay(self):
-        print('calling this')
         params = {'api_key': self.key,
-                  'thumbs': 1}
+                  'thumbs': True}
         daily = requests.get(urlAPOD, params=params).json()
-        picUrl = None
-        if 'hdurl' in daily:
-            picUrl = daily['hdurl']
-        else:
-            picUrl = daily['url']
-        picTitle = daily['title']
 
         embed = discord.Embed(color=self.color,
                               title='Astronomy Picture of The Day')
-        embed.set_image(url=picUrl)
-        embed.add_field(name='Image Title:', value=picTitle)
 
-        for x in self.bot.guilds:
-            print('this works')
-            if x.system_channel is not None:
-                await x.system_channel.send(embed=embed)
+        if daily['media_type'] == 'image':
+            picUrl = None
+            if 'hdurl' in daily:
+                picUrl = daily['hdurl']
+            else:
+                picUrl = daily['url']
+            picTitle = daily['title']
+
+            embed.add_field(name='Image Title:', value=picTitle)
+            embed.set_image(url=picUrl)
+
+            for x in self.bot.guilds:
+                if x.system_channel is not None:
+                    await x.system_channel.send(embed=embed)
+        else:
+            vidUrl = daily['url']
+            
+            embed.add_field(name='Video Title:', value=daily['title'])
+            embed.set_thumbnail(url=daily['thumbnail_url'])
+            
+            for x in self.bot.guilds:
+                if x.system_channel is not None:
+                    await x.system_channel.send(embed=embed)
+                    await x.system_channel.send(f'||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||{vidUrl}')
+
 
