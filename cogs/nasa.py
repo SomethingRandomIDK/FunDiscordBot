@@ -16,6 +16,16 @@ class Nasa(commands.Cog):
 
         self.picOfDay.start()
 
+        self.help = {'commands':
+                     {'nasa':
+                      {'usage': '`nasa [word/phrase]`\nThe `[word/phrase]` should be replaced by what you are searching for',
+                       'description': 'Searches NASA\'s Image Database an returns the closest result'},
+                      'nextimg':
+                      {'usage': '',
+                       'description': ''}},
+                     'features':
+                     {'Astronomy Picture of the Day': ''}}
+
     @commands.command(name='nasa')
     async def nasaSearch(self, ctx, *args):
         '''Submits a search request for only images matching args to the

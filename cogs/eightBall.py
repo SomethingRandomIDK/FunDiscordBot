@@ -8,6 +8,11 @@ class EightBall(commands.Cog):
         self.color = int(config['color'], 16)
         self.responses = config['responses']
 
+        self.help = {'commands':
+                     {'8ball':
+                      {'usage': '`8ball [question]`\nThe `[question]` should be replaced by what you are asking',
+                       'description': 'This answers questions asked like an 8ball would'}}}
+
     @commands.command(name='8ball')
     async def getResponse(self, ctx, *args):
         """When the 8ball command is called, it checks that there are

@@ -11,6 +11,17 @@ class UrbanDict(commands.Cog):
         self.selWord = None
         self.color = int(config['color'], 16)
 
+        self.help = {'commands':
+                     {'urbanrandom':
+                      {'usage': '`urbanrandom`',
+                       'description': 'This gets a random word from [Urban Dictionary](https://www.urbandictionary.com)'},
+                      'urban':
+                      {'usage': '`urban [word/phrase]`\nThe `[word/phrase]` should be replaced by what you are searching for',
+                       'description': 'This searches the [Urban Dictionary](https://www.urbandictionary.com) for a word or phrase'},
+                      'nextdef':
+                      {'usage': '`nextdef`',
+                       'description': 'This gets an alternate defintion for the last word searched using the urban command'}}}
+
     def generateResponse(self, wordEntry, embed=None):
         """Generates embeds using the Urban Dictionary defintions
         """

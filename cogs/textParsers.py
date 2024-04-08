@@ -6,6 +6,9 @@ class TextParsers(commands.Cog):
         self.bot = bot
         self.pTableColor = int(config['color'], 16)
 
+        self.help = {'features':
+                     {'Periodic Table Symbol Detector': 'Detects whether any message can be rewritten using the symbols from the periodic'}}
+
     def searchPeriodicTable(self, content):
         """Checks if content can be rewritten using Symbols from the
         Periodic Table. If possible, outputs the rewritten content as a string
