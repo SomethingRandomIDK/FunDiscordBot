@@ -1,11 +1,19 @@
-from datetime import time
+from datetime import datetime
+import json
 import discord
 import requests
 from discord.ext import commands, tasks
 
 urlSearch = 'https://images-api.nasa.gov/search'
 urlAPOD = 'https://api.nasa.gov/planetary/apod'
-APODtime = [time(hour=0, minute=0, second=0)]
+
+
+f = open('config.json')
+nasaConfig = json.load(f)['cogs']['nasa']
+f.close()
+
+APODtime = []
+APODtime.append(datetime.strptime(nasaConfig['APODtime'], '%H:%M:%S').time())
 
 class Nasa(commands.Cog):
     def __init__(self, bot, config, apiKey):
@@ -14,7 +22,9 @@ class Nasa(commands.Cog):
         self.searchResults = None
         self.key = apiKey
 
-        self.picOfDay.start()
+        if config['APOD']:
+            self.picOfDay.start()
+            
 
         self.help = {'commands':
                      {'nasa':

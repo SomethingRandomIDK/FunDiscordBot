@@ -33,11 +33,13 @@
         },
         "message": {
             "active": 1,
-            "color": "078c50",
+            "color": "078c50"
         },
         "nasa": {
             "active": 1,
-            "color": "7aa9f5"
+            "color": "7aa9f5",
+            "APOD": 1,
+            "APODtime": "00:00:00"
         }
     },
     "help": {
