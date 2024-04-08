@@ -64,7 +64,7 @@ async def help(ctx, *arg):
     else:
         commList = ''
         for x in helpList['commands']:
-            commList += x
+            commList += '`' + x + '`'
             commList += '\n'
         commList += '\nYou can use `?help [command]` for more information about each of these commands'
 
