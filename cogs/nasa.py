@@ -21,10 +21,10 @@ class Nasa(commands.Cog):
                       {'usage': '`nasa [word/phrase]`\nThe `[word/phrase]` should be replaced by what you are searching for',
                        'description': 'Searches NASA\'s Image Database an returns the closest result'},
                       'nextimg':
-                      {'usage': '',
-                       'description': ''}},
+                      {'usage': '`nextimg`',
+                       'description': 'Returns the next closest result for the previous search'}},
                      'features':
-                     {'Astronomy Picture of the Day': ''}}
+                     {'Astronomy Picture of the Day': 'Sends NASA\'s Astronomy Picture of the Day on a daily basis'}}
 
     @commands.command(name='nasa')
     async def nasaSearch(self, ctx, *args):
