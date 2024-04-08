@@ -22,7 +22,7 @@ class Nasa(commands.Cog):
                        'description': 'Searches NASA\'s Image Database an returns the closest result'},
                       'nextimg':
                       {'usage': '`nextimg`',
-                       'description': 'Returns the next closest result for the previous search'}},
+                       'description': 'Returns the next closest result for the previous nasa search'}},
                      'features':
                      {'Astronomy Picture of the Day': 'Sends NASA\'s Astronomy Picture of the Day on a daily basis'}}
 
