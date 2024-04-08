@@ -47,11 +47,11 @@ This command gives more detailed instructions about how to use the command
 ## Nasa
 The bot can interact with the NASA database through their APIs
 ### Commands
-**nasaSearch** [word/phrase]
+**nasa** [word/phrase]
 
 This command searches for the word/phrase in NASA's image and video database and gets the closest result
 
-**nextImg**
+**nextimg**
 
 This command returns an alternate image for the search
 ### Tasks
