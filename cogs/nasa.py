@@ -5,7 +5,7 @@ from discord.ext import commands, tasks
 
 urlSearch = 'https://images-api.nasa.gov/search'
 urlAPOD = 'https://api.nasa.gov/planetary/apod'
-APODtime = [time(hour=18, minute=53, second=45)]
+APODtime = [time(hour=0, minute=0, second=0)]
 
 class Nasa(commands.Cog):
     def __init__(self, bot, config, apiKey):
@@ -18,6 +18,9 @@ class Nasa(commands.Cog):
 
     @commands.command(name='nasa')
     async def nasaSearch(self, ctx, *args):
+        '''Submits a search request for only images matching args to the
+        NASA Image/Video API and then sends the first result
+        '''
         search = ' '.join(args)
         searchParams = {'q': search,
                         'media_type': 'image'}
@@ -38,6 +41,9 @@ class Nasa(commands.Cog):
 
     @commands.command(name='nextimg')
     async def nextImg(self, ctx):
+        '''Sends the next result returned from last search made with the nasa
+        command
+        '''
         embed = discord.Embed(color=self.color, title='NASA Image Search')
         if len(self.searchResults) == 0:
             embed.add_field(name='End of Results',
@@ -52,6 +58,9 @@ class Nasa(commands.Cog):
 
     @tasks.loop(time=APODtime)
     async def picOfDay(self):
+        '''Sends NASA Astronomy Picture of the Day in all server's system
+        channel at the time specified by APODtime
+        '''
         params = {'api_key': self.key,
                   'thumbs': True}
         daily = requests.get(urlAPOD, params=params).json()
