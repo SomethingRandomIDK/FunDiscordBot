@@ -5,7 +5,7 @@ from discord.ext import commands, tasks
 
 urlSearch = 'https://images-api.nasa.gov/search'
 urlAPOD = 'https://api.nasa.gov/planetary/apod'
-APODtime = [time(hour=17, minute=56)]
+APODtime = [time(hour=18, minute=53, second=45)]
 
 class Nasa(commands.Cog):
     def __init__(self, bot, config, apiKey):
@@ -16,28 +16,39 @@ class Nasa(commands.Cog):
 
         self.picOfDay.start()
 
-    @commands.command(name='nasaSearch')
+    @commands.command(name='nasa')
     async def nasaSearch(self, ctx, *args):
         search = ' '.join(args)
         searchParams = {'q': search,
                         'media_type': 'image'}
         images = requests.get(urlSearch, params=searchParams).json()
-        self.searchResults = images['collection']['items']
-        embed = discord.Embed(color=self.color, title='NASA Image Search')
-        embed.set_image(url=self.searchResults[0]['links'][0]['href'])
-        embed.add_field(name='Image Title:',
-                        value=self.searchResults[0]['data'][0]['title'])
-        await ctx.send(embed=embed)
-        self.searchResults.pop(0)
 
-    @commands.command(name='nextImg')
+        embed = discord.Embed(color=self.color, title='NASA Image Search')
+        if len(images['collection']['items']) == 0:
+            embed.add_field(name='No Results',
+                            value='No results were found from your search. Try searching something else.')
+        else:
+            self.searchResults = images['collection']['items']
+            embed.set_image(url=self.searchResults[0]['links'][0]['href'])
+            embed.add_field(name='Image Title:',
+                            value=self.searchResults[0]['data'][0]['title'])
+            self.searchResults.pop(0)
+
+        await ctx.send(embed=embed)
+
+    @commands.command(name='nextimg')
     async def nextImg(self, ctx):
         embed = discord.Embed(color=self.color, title='NASA Image Search')
-        embed.set_image(url=self.searchResults[0]['links'][0]['href'])
-        embed.add_field(name='Image Title:',
-                        value=self.searchResults[0]['data'][0]['title'])
+        if len(self.searchResults) == 0:
+            embed.add_field(name='End of Results',
+                            value='No additional results were found from your search. Try searching something else.')
+        else:
+            embed.set_image(url=self.searchResults[0]['links'][0]['href'])
+            embed.add_field(name='Image Title:',
+                            value=self.searchResults[0]['data'][0]['title'])
+            self.searchResults.pop(0)
+
         await ctx.send(embed=embed)
-        self.searchResults.pop(0)
 
     @tasks.loop(time=APODtime)
     async def picOfDay(self):
