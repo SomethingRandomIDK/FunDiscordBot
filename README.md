@@ -51,13 +51,20 @@ The bot can interact with the NASA database through their APIs
 
 This command searches for the word/phrase in NASA's image and video database and gets the closest result
 
+<img src="./images/nasa.png" alt="nasa [word/phrase]">
+
 **nextimg**
 
 This command returns an alternate image for the search
+
+<img src="./images/nextimg.png" alt="nextimg">
+
 ### Tasks
 **Astronomy Picture of the Day:**
 
 This sends NASA's Astronomy Picture of the Day in the discord servers' system channel, on a daily basis at the time specified in the config file
+
+<img src="./images/apod.png" alt="Astronomy Picture of The Day">
 
 ## Urban Dictionary
 Has a set of 3 commands to lookup words from [Urban Dictionary](https://www.urbandictionary.com)
