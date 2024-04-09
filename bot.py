@@ -34,7 +34,7 @@ async def load_cogs():
     allCogs = {'urban': Urban(bot, config['cogs']['urban']),
                'nasa': Nasa(bot, config['cogs']['nasa'], os.getenv('NASA_API')),
                '8ball': Eight(bot, config['cogs']['8ball']),
-               'message': Text(bot, config['cogs']['message'])}
+               'ptable': Text(bot, config['cogs']['ptable'])}
 
     for x in config['cogs']:
         if config['cogs'][x]['active']:
