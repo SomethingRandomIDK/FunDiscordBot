@@ -2,31 +2,16 @@ import discord
 import random
 from discord.ext import commands
 
-responses = ['It is certain',
-             'It is decidedly so',
-             'Without a doubt',
-             'Yes definitely',
-             'You may rely on it',
-             'As I see it, yes',
-             'Most likely',
-             'Outlook good',
-             'Yes',
-             'Signs point to yes',
-             'Reply hazy, try again',
-             'Ask again later',
-             'Better not tell you now',
-             'Cannot predict now',
-             'Concentrate and ask again',
-             'Don\'t count on it',
-             'My reply is no',
-             'My sources say no',
-             'Outlook not so good',
-             'Very doubtful']
-
 class EightBall(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot, config):
         self.bot = bot
-        self.color = 0x4b0082
+        self.color = int(config['color'], 16)
+        self.responses = config['responses']
+
+        self.help = {'commands':
+                     {'8ball':
+                      {'usage': '`8ball [question]`\nThe `[question]` should be replaced by what you are asking',
+                       'description': 'This answers questions asked like an 8ball would'}}}
 
     @commands.command(name='8ball')
     async def getResponse(self, ctx, *args):
@@ -37,11 +22,13 @@ class EightBall(commands.Cog):
 
         if len(args) == 0:
             embed = discord.Embed(color = self.color)
-            embed.add_field(name='8ball Response', value='Please ask a question')
+            embed.add_field(name='8ball Response',
+                            value='Please ask a question')
             await ctx.send(embed=embed)
             return
 
         embed = discord.Embed(color = self.color)
-        embed.add_field(name='8ball Response', value=random.choice(responses))
+        embed.add_field(name='8ball Response',
+                        value=random.choice(self.responses))
         await ctx.send(embed=embed)
 
