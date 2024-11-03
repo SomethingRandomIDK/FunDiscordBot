@@ -62,7 +62,7 @@ class UrbanDict(commands.Cog):
             return
 
         url = 'https://api.urbandictionary.com/v0/define?term='
-        url += arg.lower().strip().replace(' ', '&')
+        url += arg.lower().strip()
 
         self.selDefList = requests.get(url).json()['list']
         self.defListLen = len(self.selDefList)
